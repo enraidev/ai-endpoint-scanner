@@ -63,6 +63,8 @@ Use the **Mode koneksi** selector to override the automatic choice: `Auto` (defa
 
 Direct mode limitation: the provider must allow cross-origin requests (CORS) from this origin. When it does not, the browser blocks the response and the app reports *"Request diblokir CORS oleh provider; jalankan via XAMPP/PHP lokal untuk bypass CORS."* Run the PHP proxy (XAMPP or your own server) to bypass CORS. In direct mode the API key travels from the browser straight to the provider.
 
+Which providers work on the live demo: any endpoint that returns `Access-Control-Allow-Origin` for your page origin. Checked on 18 November 2026: `https://openrouter.ai/api/v1` allows any origin, while `https://enrai.web.id/v1` does not send CORS headers, so the Enrai preset needs the PHP proxy (or a server-side deployment).
+
 ## Proxy API
 
 `api.php` accepts JSON `POST` requests:
@@ -136,6 +138,8 @@ Halaman yang sama berjalan dalam dua mode dan memilih otomatis:
 Selector **Mode koneksi** menimpa pilihan otomatis: `Auto` (default), `PHP Proxy`, atau `Direct Browser Fetch`. Badge di sebelahnya menampilkan mode yang sedang aktif, termasuk `fallback dari PHP` saat request proxy gagal dan diulang langsung dari browser.
 
 Batas mode direct: provider harus mengizinkan CORS dari origin ini. Jika tidak, browser memblokir respons dan aplikasi menampilkan pesan *"Request diblokir CORS oleh provider; jalankan via XAMPP/PHP lokal untuk bypass CORS."* Jalankan proxy PHP (XAMPP atau server sendiri) untuk melewati CORS. Pada mode direct, API key dikirim langsung dari browser ke provider.
+
+Provider yang bisa dipakai di live demo: endpoint yang mengirim `Access-Control-Allow-Origin` untuk origin halaman. Dicek 18 November 2026: `https://openrouter.ai/api/v1` mengizinkan semua origin, sedangkan `https://enrai.web.id/v1` tidak mengirim header CORS, jadi preset Enrai perlu proxy PHP (atau deploy server-side).
 
 ### Keamanan
 
