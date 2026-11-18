@@ -1,24 +1,36 @@
 <!doctype html>
 <html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#151412"><title>AI Endpoint &amp; Model Scanner</title><style>:root{color-scheme:dark;--bg:#151412;--panel:#1d1b18;--line:#38332d;--text:#f2eee7;--muted:#a49b8f;--accent:#e6a85b;--green:#81c995;--red:#ed8a7d;--radius:14px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0%,#292117 0,transparent 38%),var(--bg);color:var(--text);min-height:100vh}button,input,textarea{font:inherit}button{cursor:pointer;color:inherit}button:disabled{opacity:.48;cursor:not-allowed}.shell{max-width:1200px;margin:auto;padding:38px 26px 64px}.topline{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}h1{font-size:clamp(30px,5vw,43px);letter-spacing:-.045em;margin:14px 0 8px}.subtitle{color:var(--muted);margin:0;max-width:650px;line-height:1.6}.config{margin:30px 0 22px;padding:22px;background:#1d1b18;border:1px solid var(--line);border-radius:var(--radius)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:19px}.section-head h2,.list-heading h2{margin:0;font-size:16px}.saved,.count{font-size:12px;color:var(--muted)}.fields{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}.field{min-width:0}.field label{display:block;font-size:12px;font-weight:650;color:#c8bfb3;margin:0 0 8px}.field input,.field textarea{width:100%;color:var(--text);background:#141310;border:1px solid var(--line);border-radius:9px;padding:11px 12px;outline:none}.field input:focus,.field textarea:focus{border-color:#b78145}.field input{height:42px}.field textarea{height:70px;resize:vertical;line-height:1.5}.field.full{grid-column:1/-1}.hint{font-size:11px;color:#81786d;margin-top:6px}.actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px}.btn{border:1px solid var(--line);border-radius:9px;background:#292620;padding:10px 15px;font-size:13px;font-weight:650}.btn.primary{background:var(--accent);color:#20170d;border-color:var(--accent)}.btn.subtle{background:transparent}.btn.danger{color:var(--red);border-color:#633a34;background:#2a1d1a}.btn.small{padding:7px 10px;font-size:12px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:28px 0 15px}.list-heading{display:flex;align-items:baseline;gap:10px}.filters{display:flex;gap:5px;border:1px solid var(--line);border-radius:10px;padding:4px;background:#1b1916}.filter{background:transparent;border:0;border-radius:7px;padding:7px 10px;color:var(--muted);font-size:12px}.filter.active{background:#373128;color:var(--text)}.queue{display:none;margin:0 0 14px;padding:13px 15px;background:#211f1b;border:1px solid var(--line);border-radius:11px}.queue.show{display:block}.queue-top{display:flex;justify-content:space-between;gap:12px;font-size:12px}.progress-track{height:5px;background:#39342d;border-radius:8px;overflow:hidden;margin-top:11px}.progress-fill{height:100%;width:0;background:var(--accent);transition:width .2s}.notice{display:none;margin:14px 0;padding:12px 14px;border:1px solid #633a34;border-radius:10px;background:#2a1d1a;color:#f2b3a8;font-size:13px}.notice.show{display:block}.empty{padding:54px 20px;text-align:center;background:#1b1916;border:1px dashed #464037;border-radius:var(--radius);color:var(--muted)}.empty strong{display:block;color:var(--text);margin-bottom:6px}.model-list{display:grid;gap:9px}.model{display:grid;grid-template-columns:minmax(180px,1fr) 150px 115px auto;align-items:center;gap:14px;padding:14px 15px;background:var(--panel);border:1px solid var(--line);border-radius:12px}.model-name{min-width:0}.model-name strong{display:block;overflow-wrap:anywhere;font-size:13px}.model-name small{display:block;color:#847c71;font-size:11px;margin-top:4px}.status{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:20px;padding:6px 9px;width:max-content;color:var(--muted);font-size:11px;white-space:nowrap}.status:before{content:"";width:6px;height:6px;border-radius:50%;background:#827b70}.status.online{color:var(--green);border-color:#355541}.status.online:before{background:var(--green)}.status.error{color:var(--red);border-color:#58352f}.status.error:before{background:var(--red)}.status.testing{color:var(--accent);border-color:#5c472b}.status.testing:before{background:var(--accent)}.latency{font-size:12px;color:var(--muted)}.model-actions{display:flex;justify-content:flex-end;gap:7px}.model-actions .btn{white-space:nowrap}.modal{width:min(760px,calc(100% - 28px));max-height:85vh;padding:0;background:#1d1b18;color:var(--text);border:1px solid #494137;border-radius:15px}.modal::backdrop{background:#080706bd}.modal-head{display:flex;justify-content:space-between;padding:16px 19px;border-bottom:1px solid var(--line)}.modal-head h2{font-size:15px;margin:0;overflow-wrap:anywhere}.modal-body{padding:18px 20px 22px}.response-label{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin:15px 0 8px}.reply,.raw{white-space:pre-wrap;overflow-wrap:anywhere;padding:12px;border:1px solid var(--line);border-radius:9px;background:#141310;font-size:13px;line-height:1.55}.raw{overflow:auto;max-height:42vh;font:12px/1.55 ui-monospace,Consolas,monospace}.footer{margin-top:27px;color:#746d63;font-size:11px;text-align:center}@media(max-width:760px){.shell{padding:25px 16px 45px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.toolbar{align-items:flex-start;flex-direction:column}.model{grid-template-columns:minmax(0,1fr) auto;gap:10px}.model .latency{grid-column:1;grid-row:2}.model .status{grid-column:2;grid-row:1}.model-actions{grid-column:2;grid-row:2}.config{padding:17px}}@media(max-width:430px){.section-head{align-items:flex-start;flex-direction:column}.model-actions .btn{padding:7px 8px;font-size:11px}.filters{width:100%;justify-content:space-between}.actions .btn{flex:1}}
 .field select{width:100%;height:42px;color:var(--text);background:#141310;border:1px solid var(--line);border-radius:9px;padding:10px 12px;outline:none}.field select:focus{border-color:#b78145}.key-row{display:flex;gap:8px}.key-row input{flex:1;min-width:0}.key-row .btn{height:42px}.toolbar{align-items:flex-start;flex-wrap:wrap}.sort-controls{margin-left:auto}.stats-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:17px 0}.stat-card{min-width:0;padding:17px 18px;background:linear-gradient(145deg,#23201b,#1b1916);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;gap:7px}.stat-card>span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:700}.stat-card strong{font-size:clamp(22px,3vw,29px);letter-spacing:-.04em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.stat-card small{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.online-stat strong{color:var(--green)}.error-stat strong{color:var(--red)}.fastest-stat strong{font-size:18px;color:var(--accent)}.delay-control{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px;font-weight:650}.delay-control input{width:100px;height:38px;color:var(--text);background:#141310;border:1px solid var(--line);border-radius:8px;padding:8px 10px}.model-actions{flex-wrap:wrap}.code-modal{width:min(760px,calc(100% - 32px))}.eyebrow{font-size:10px;letter-spacing:.14em;font-weight:800;color:var(--accent)}.modal-head h2,.drawer-head h2{margin:5px 0 0}.code-tabs{display:flex;flex-wrap:wrap;gap:8px;padding:14px 20px 0}.code-body{padding:16px 20px 20px}.code-content{max-height:52vh;min-height:200px;margin:0 0 14px;font-size:12px;line-height:1.6}.drawer-scrim{position:fixed;inset:0;background:#0009;z-index:19;opacity:0;visibility:hidden;transition:.2s}.drawer-scrim.open{opacity:1;visibility:visible}.chat-drawer{position:fixed;z-index:20;right:0;top:0;bottom:0;width:min(460px,100%);background:#1b1916;border-left:1px solid var(--line);box-shadow:-24px 0 70px #0007;display:flex;flex-direction:column;transform:translateX(102%);transition:transform .25s ease;padding:22px}.chat-drawer.open{transform:translateX(0)}.drawer-head{display:flex;justify-content:space-between;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line)}.drawer-head h2{font-size:19px}.drawer-head small{display:block;color:var(--muted);margin-top:5px;overflow-wrap:anywhere}.chat-notice{font-size:11px;color:var(--muted);padding:12px 0}.chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:12px 3px}.chat-welcome{color:var(--muted);font-size:13px;text-align:center;margin:auto}.chat-bubble{max-width:88%;padding:11px 13px;border:1px solid var(--line);border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.55}.chat-bubble.user{align-self:flex-end;background:#38291b;border-color:#624321}.chat-bubble.assistant{align-self:flex-start;background:#22201c}.chat-bubble.error{border-color:#743d36;color:#f1a095}.typing{font-size:11px;color:var(--muted);padding:8px 0}.typing span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);margin-right:3px;animation:pulse .9s infinite alternate}.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}@keyframes pulse{to{opacity:.25;transform:translateY(-3px)}}.chat-form{border-top:1px solid var(--line);padding-top:14px}.chat-form textarea{width:100%;resize:vertical;min-height:74px;background:#141310;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;outline:none}.chat-form-actions{display:flex;justify-content:space-between;gap:8px;margin-top:10px}.chat-form-actions .btn{margin:0}@media(max-width:850px){.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{gap:12px}.sort-controls{margin-left:0}.model{grid-template-columns:minmax(0,1fr) auto}.model-actions{grid-column:1/-1;justify-content:flex-start}}@media(max-width:560px){.shell{padding:25px 16px 48px}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.config{padding:16px}.stats-grid{gap:8px}.stat-card{padding:13px}.filters{flex-wrap:wrap}.delay-control{width:100%;justify-content:flex-start}.batch-actions{align-items:stretch}.toolbar{display:block}.toolbar>.filters{margin-top:12px}.sort-controls{display:flex}.model{gap:8px}.latency{justify-self:end}.model-actions{gap:6px}.model-actions .btn{padding:7px 9px}.chat-drawer{padding:17px}}
+.mode-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.mode-row label{font-size:12px;font-weight:650;color:#c8bfb3}
+.mode-row select{width:auto;min-width:200px;height:38px}
+.mode-badge{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:20px;padding:6px 10px;font-size:11px;color:var(--muted);white-space:nowrap}
+.mode-badge:before{content:"";width:6px;height:6px;border-radius:50%;background:#827b70}
+.mode-badge.php{color:var(--green);border-color:#355541}
+.mode-badge.php:before{background:var(--green)}
+.mode-badge.direct{color:var(--accent);border-color:#5c472b}
+.mode-badge.direct:before{background:var(--accent)}
+.mode-badge.pending{color:var(--accent);border-color:#5c472b}
+.mode-badge.pending:before{background:var(--accent);animation:pulse 1s infinite alternate}
 </style></head><body><main class="shell"><div class="topline">● API DIAGNOSTICS</div><h1>AI Endpoint &amp; Model Scanner</h1><p class="subtitle">Temukan model yang tersedia, ukur waktu respons, dan uji endpoint OpenAI-compatible Anda.</p>
 <section class="config"><div class="section-head"><h2>Konfigurasi endpoint</h2><span class="saved" id="saved-indicator">Tersimpan otomatis di browser</span></div><div class="fields">
 <div class="field"><label for="provider">Preset Provider</label><select id="provider"><option value="enrai">Enrai Free API (https://enrai.web.id/v1)</option><option value="openrouter">OpenRouter (https://openrouter.ai/api/v1)</option><option value="groq">Groq (https://api.groq.com/openai/v1)</option><option value="localhost">Localhost / 9Router (http://localhost:8080/v1)</option><option value="custom">Custom Endpoint</option></select><label for="base-url" style="margin-top:12px">Base URL</label><input id="base-url" type="url" value="https://enrai.web.id/v1" placeholder="https://api.example.com/v1"></div>
 <div class="field"><label for="api-key">API Key (opsional)</label><div class="key-row"><input id="api-key" type="password" placeholder="sk-..." autocomplete="off"><button class="btn small" id="toggle-key" type="button" aria-label="Tampilkan API key" title="Show / Hide API key">◉</button></div><div class="hint">Kunci tetap tersembunyi saat merekam layar.</div></div>
 <div class="field full"><label for="prompt">Custom Prompt</label><textarea id="prompt" placeholder="Reply with OK only.">Reply with OK only.</textarea><div class="hint">Prompt dikirim sebagai pesan user pada setiap pengujian.</div></div></div>
-<div class="actions"><button class="btn primary" id="scan-button" type="button">Scan Models</button><span class="hint">Memanggil /models melalui proxy PHP lokal.</span></div></section>
+<div class="mode-row"><label for="conn-mode">Mode koneksi</label><select id="conn-mode"><option value="auto">Auto (deteksi otomatis)</option><option value="php">PHP Proxy (api.php)</option><option value="direct">Direct Browser Fetch</option></select><span class="mode-badge pending" id="mode-badge">Mendeteksi mode…</span></div><div class="actions"><button class="btn primary" id="scan-button" type="button">Scan Models</button><span class="hint" id="request-hint">Memanggil /models sesuai mode koneksi.</span></div></section>
 <section><div class="toolbar"><div class="list-heading"><h2>Model tersedia</h2><span class="count" id="model-count">Belum ada model</span></div><div class="filters"><button class="filter active" data-filter="all" type="button">Semua</button><button class="filter" data-filter="online" type="button">Online</button><button class="filter" data-filter="error" type="button">Error</button></div><div class="filters sort-controls" aria-label="Urutan model"><button class="filter active" data-sort="default" type="button">Default</button><button class="filter" data-sort="latency" type="button">Tercepat / Latency</button></div></div><div class="stats-grid" aria-label="Statistik model"><article class="stat-card"><span>Total Models</span><strong id="stat-total">0</strong><small>model terdeteksi</small></article><article class="stat-card online-stat"><span>Online</span><strong id="stat-online">0</strong><small>model tersedia</small></article><article class="stat-card error-stat"><span>Failed / Error</span><strong id="stat-error">0</strong><small>model gagal diuji</small></article><article class="stat-card fastest-stat"><span>Fastest Model</span><strong id="stat-fastest">—</strong><small id="stat-fastest-ms">Belum ada hasil latency</small></article></div>
 <div class="actions batch-actions" style="margin:0 0 14px"><button class="btn primary" id="test-all-button" type="button" disabled>Test All Models</button><label class="delay-control" for="delay-ms">Delay (ms)<input id="delay-ms" type="number" min="0" max="60000" step="100" value="3000"></label><button class="btn danger" id="stop-button" type="button" hidden>Stop</button><button class="btn subtle" id="copy-button" type="button" disabled>Copy Online Models</button></div>
 <div class="queue" id="queue" aria-live="polite"><div class="queue-top"><span id="queue-label">Siap memulai…</span><span id="queue-count">0 / 0</span></div><div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div></div><div class="notice" id="notice" role="alert"></div>
-<div class="empty" id="empty-state"><strong>Belum ada model untuk ditampilkan</strong>Scan endpoint untuk memulai.</div><div class="model-list" id="model-list" aria-live="polite"></div></section><p class="footer">PHP cURL proxy · Konfigurasi disimpan di browser</p></main>
+<div class="empty" id="empty-state"><strong>Belum ada model untuk ditampilkan</strong>Scan endpoint untuk memulai.</div><div class="model-list" id="model-list" aria-live="polite"></div></section><p class="footer">PHP cURL proxy / direct browser fetch · Konfigurasi disimpan di browser</p></main>
 <dialog class="modal" id="response-modal"><div class="modal-head"><h2 id="modal-title">Respons model</h2><button class="btn small" id="close-modal" type="button">Tutup</button></div><div class="modal-body"><div class="response-label">Balasan model</div><div class="reply" id="modal-reply">Belum ada respons.</div><div class="response-label">Raw JSON response</div><pre class="raw" id="modal-raw">Belum ada respons.</pre></div></dialog><dialog class="modal code-modal" id="code-modal"><div class="modal-head"><div><span class="eyebrow">GENERATED SNIPPET</span><h2 id="code-title">Kode integrasi</h2></div><button class="btn small" id="close-code" type="button">Tutup</button></div><div class="code-tabs" role="tablist"><button class="filter active" data-code-tab="curl" type="button">cURL</button><button class="filter" data-code-tab="python" type="button">Python (openai)</button><button class="filter" data-code-tab="javascript" type="button">JavaScript (fetch)</button><button class="filter" data-code-tab="php" type="button">PHP (cURL)</button></div><div class="code-body"><pre id="code-content" class="raw code-content"></pre><button class="btn primary" id="copy-code" type="button">Copy Code</button></div></dialog><div class="drawer-scrim" id="chat-scrim"></div><aside class="chat-drawer" id="chat-drawer" aria-label="Quick Chat Playground" aria-hidden="true"><div class="drawer-head"><div><span class="eyebrow">QUICK PLAYGROUND</span><h2 id="chat-title">Chat with model</h2><small id="chat-model-id"></small></div><button class="btn small" id="close-chat" type="button" aria-label="Tutup chat">✕</button></div><div class="chat-notice">Percakapan hanya tersimpan sementara di halaman ini.</div><div class="chat-messages" id="chat-messages" aria-live="polite"><div class="chat-welcome">Kirim pesan untuk mulai mencoba model ini.</div></div><div class="typing" id="chat-typing" hidden><span></span><span></span><span></span> Model sedang mengetik…</div><form class="chat-form" id="chat-form"><textarea id="chat-input" rows="3" placeholder="Tulis pesan…" aria-label="Pesan Anda" required></textarea><div class="chat-form-actions"><button class="btn subtle" id="clear-chat" type="button">Clear Chat</button><button class="btn primary" id="send-chat" type="submit">Kirim ↗</button></div></form></aside><script>(()=>{'use strict';
-const $=s=>document.querySelector(s),key='ai-endpoint-model-scanner-config-v1',base=$('#base-url'),apiKey=$('#api-key'),prompt=$('#prompt'),list=$('#model-list'),modal=$('#response-modal');
+const $=s=>document.querySelector(s),key='ai-endpoint-model-scanner-config-v1',base=$('#base-url'),apiKey=$('#api-key'),prompt=$('#prompt'),list=$('#model-list'),modal=$('#response-modal'),connModeSel=$('#conn-mode'),modeBadge=$('#mode-badge'),requestHint=$('#request-hint');
 let models=[],filter='all',sortMode='default',queue=false,stop=false,scanning=false,controller=null,delayTimer=null,delayResolve=null,activeChatModel=null,chatHistory=[],chatBusy=false,codeModel=null,codeTab='curl';
+let connMode='auto',phpAvailable=null;
 function config(){return{base_url:base.value.trim(),api_key:apiKey.value.trim(),prompt:prompt.value.trim()||'Reply with OK only.'};}
 const providers={enrai:'https://enrai.web.id/v1',openrouter:'https://openrouter.ai/api/v1',groq:'https://api.groq.com/openai/v1',localhost:'http://localhost:8080/v1'};
 function updateProvider(){const match=Object.entries(providers).find(([,url])=>url===base.value.trim());$('#provider').value=match?match[0]:'custom';}
-function save(){try{localStorage.setItem(key,JSON.stringify({base_url:base.value,api_key:apiKey.value,prompt:prompt.value,delay_ms:$('#delay-ms').value}));$('#saved-indicator').textContent='Konfigurasi tersimpan';}catch(_){}}
-function restore(){try{const x=JSON.parse(localStorage.getItem(key)||'null');if(x){base.value=x.base_url||'https://enrai.web.id/v1';apiKey.value=x.api_key||'';prompt.value=x.prompt||'Reply with OK only.';$('#delay-ms').value=x.delay_ms||'3000';}}catch(_){}updateProvider();}
+function save(){try{localStorage.setItem(key,JSON.stringify({base_url:base.value,api_key:apiKey.value,prompt:prompt.value,delay_ms:$('#delay-ms').value,conn_mode:connModeSel.value}));$('#saved-indicator').textContent='Konfigurasi tersimpan';}catch(_){}}
+function restore(){try{const x=JSON.parse(localStorage.getItem(key)||'null');if(x){base.value=x.base_url||'https://enrai.web.id/v1';apiKey.value=x.api_key||'';prompt.value=x.prompt||'Reply with OK only.';$('#delay-ms').value=x.delay_ms||'3000';connModeSel.value=x.conn_mode||'auto';}}catch(_){}connMode=connModeSel.value||'auto';updateProvider();}
 function notice(s){$('#notice').textContent=s;$('#notice').classList.add('show');}function clearNotice(){$('#notice').textContent='';$('#notice').classList.remove('show');}
 function controls(){$('#scan-button').disabled=queue||scanning;$('#test-all-button').disabled=!models.length||queue||scanning||models.some(m=>m.status==='testing');$('#test-all-button').textContent=queue?'Test All Sedang Berjalan':'Test All Models';$('#stop-button').hidden=!queue;$('#copy-button').disabled=!models.some(m=>m.status==='online');$('#empty-state').style.display=models.length?'none':'';}
 function render(){list.replaceChildren();const shown=models.filter(m=>filter==='all'||(filter==='online'&&m.status==='online')||(filter==='error'&&m.status==='error'));if(sortMode==='latency')shown.sort((a,b)=>{const av=a.latency===null?Infinity:Number(a.latency),bv=b.latency===null?Infinity:Number(b.latency);return av-bv;});$('#model-count').textContent=`${models.length} model${models.length===1?'':'s'}`;const online=models.filter(m=>m.status==='online'),failed=models.filter(m=>m.status==='error'),fastest=online.filter(m=>m.latency!==null).sort((a,b)=>Number(a.latency)-Number(b.latency))[0];$('#stat-total').textContent=models.length;$('#stat-online').textContent=online.length;$('#stat-error').textContent=failed.length;$('#stat-fastest').textContent=fastest?fastest.name:'—';$('#stat-fastest-ms').textContent=fastest?`${fastest.latency} ms · tercepat`:'Belum ada hasil latency';
@@ -27,7 +39,134 @@ const badge=document.createElement('span');badge.className='status '+(m.status==
 const latency=document.createElement('span');latency.className='latency';latency.textContent=m.latency!==null?`${m.latency} ms`:m.error||'—';latency.title=m.error||'';
 const actions=document.createElement('div');actions.className='model-actions';for(const [action,label] of [['test',m.status==='testing'?'Testing…':'Test'],['view','Response'],['code','</> Code'],['chat','Chat']]){const b=document.createElement('button');b.type='button';b.className='btn small';b.dataset.action=action;b.dataset.id=m.id;b.textContent=label;b.disabled=(action==='test'&&(m.status==='testing'||queue||scanning))||(action==='view'&&!m.result);actions.append(b);}row.append(name,badge,latency,actions);list.append(row);}
 if(models.length&&!shown.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='Tidak ada model yang cocok dengan filter ini.';list.append(empty);}controls();}
-async function call(action,id,signal,extra={}){const c=config();if(!c.base_url)throw Error('Masukkan Base URL terlebih dahulu.');const r=await fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...c,model:id||'',...extra}),signal});let d;try{d=await r.json();}catch(_){throw Error(`Respons proxy tidak valid (HTTP ${r.status}).`);}if(!r.ok||d.success===false){const error=Error(d.error||`HTTP ${r.status}`);error.responseData=d;throw error;}return d;}
+async function probePhp(signal){
+  if(isStaticHost()){phpAvailable=false;return false;}
+  try{
+    const r=await fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'__probe__'}),signal});
+    const text=await r.text();
+    let d=null;try{d=JSON.parse(text);}catch(_){}
+    phpAvailable=!!d&&typeof d==='object';
+    return phpAvailable;
+  }catch(e){if(e.name==='AbortError')throw e;phpAvailable=false;return false;}
+}
+function isStaticHost(){return /\.github\.io$/i.test(location.hostname)||location.protocol==='file:';}
+function setBadge(mode,detail){
+  if(!modeBadge)return;
+  const labels={php:'PHP Proxy aktif',direct:'Direct Browser Fetch',pending:'Mendeteksi mode…'};
+  const label=labels[mode]||'Mode tidak diketahui';
+  modeBadge.className='mode-badge'+(labels[mode]?' '+mode:'');
+  modeBadge.textContent=detail?label+' · '+detail:label;
+  if(requestHint)requestHint.textContent=mode==='direct'
+    ?'Memanggil /models langsung dari browser (butuh CORS dari provider).'
+    :mode==='php'?'Memanggil /models melalui proxy PHP lokal.':'Memanggil /models sesuai mode koneksi.';
+}
+async function chooseMode(signal){
+  if(connMode==='direct')return 'direct';
+  if(connMode==='php')return 'php';
+  if(phpAvailable===null)await probePhp(signal);
+  return phpAvailable?'php':'direct';
+}
+async function callPhp(action,id,signal,extra){
+  const c=config();
+  const r=await fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...c,model:id||'',...extra}),signal});
+  const text=await r.text();
+  let d=null;try{d=JSON.parse(text);}catch(_){}
+  const rawPhp=text.trimStart().startsWith('<?php');
+  if(!d||typeof d!=='object'||rawPhp){
+    const error=Error(rawPhp?'PHP proxy tidak tersedia: api.php dikirim mentah, bukan dieksekusi.':`Respons proxy tidak valid (HTTP ${r.status}).`);
+    error.proxyMissing=true;
+    phpAvailable=false;
+    throw error;
+  }
+  if(!r.ok||d.success===false){const error=Error(d.error||`HTTP ${r.status}`);error.responseData=d;throw error;}
+  return d;
+}
+function normalizeModels(payload){
+  const items=Array.isArray(payload&&payload.data)?payload.data:Array.isArray(payload&&payload.models)?payload.models:[];
+  const out=[];
+  for(const item of items){
+    if(typeof item==='string'&&item){out.push({id:item,name:item});continue;}
+    if(!item||typeof item!=='object')continue;
+    const id=String(item.id||item.name||'');
+    if(id)out.push({id,name:String(item.name||id)});
+  }
+  return out;
+}
+function replyText(payload){
+  const message=payload&&payload.choices&&payload.choices[0]?payload.choices[0].message:null;
+  const content=message?message.content:null;
+  if(typeof content==='string')return content;
+  if(Array.isArray(content))return content.map(part=>part&&typeof part.text==='string'?part.text:'').filter(Boolean).join('\n');
+  return '';
+}
+async function directCall(action,id,signal,extra){
+  const c=config(),base=c.base_url.replace(/\/+$/,'');
+  const headers={'Content-Type':'application/json',Accept:'application/json'};
+  if(c.api_key)headers.Authorization='Bearer '+c.api_key;
+  const started=performance.now();
+  let r;
+  try{
+    if(action==='scan'){
+      r=await fetch(base+'/models',{method:'GET',headers,signal});
+    }else{
+      const messages=action==='chat'?(extra.messages||[]):[{role:'user',content:c.prompt}];
+      r=await fetch(base+'/chat/completions',{method:'POST',headers,body:JSON.stringify({model:id,messages,temperature:0.2,max_tokens:512}),signal});
+    }
+  }catch(e){
+    if(e.name==='AbortError')throw e;
+    const error=Error('Request diblokir CORS oleh provider; jalankan via XAMPP/PHP lokal untuk bypass CORS. ('+(e.message||'network error')+')');
+    error.cors=true;
+    throw error;
+  }
+  const text=await r.text();
+  const latency=Math.round((performance.now()-started)*100)/100;
+  let payload=null;try{payload=JSON.parse(text);}catch(_){}
+  const result={success:r.ok,action,model:id||'',http_code:r.status,latency_ms:latency,reply_text:'',raw_response:payload??text};
+  if(!r.ok){
+    const detail=payload&&payload.error&&payload.error.message?payload.error.message:payload&&payload.error?payload.error:`Endpoint mengembalikan HTTP ${r.status}.`;
+    result.error=String(detail);
+    const error=Error(result.error);error.responseData=result;throw error;
+  }
+  if(action==='scan'){
+    result.models=normalizeModels(payload);
+    if(!result.models.length){
+      result.success=false;
+      result.error='Respons berhasil diterima, tetapi tidak berisi daftar model (data[] atau models[]).';
+      const error=Error(result.error);error.responseData=result;throw error;
+    }
+    return result;
+  }
+  result.reply_text=replyText(payload);
+  return result;
+}
+async function call(action,id,signal,extra={}){
+  const c=config();
+  if(!c.base_url)throw Error('Masukkan Base URL terlebih dahulu.');
+  const mode=await chooseMode(signal);
+  let fallback='';
+  if(mode==='php'){
+    try{
+      const data=await callPhp(action,id,signal,extra);
+      setBadge('php');
+      return data;
+    }catch(e){
+      if(e.name==='AbortError')throw e;
+      if(!(e.proxyMissing||e instanceof TypeError))throw e;
+      phpAvailable=false;
+      fallback='fallback dari PHP';
+    }
+  }
+  const data=await directCall(action,id,signal,extra);
+  setBadge('direct',fallback);
+  return data;
+}
+async function initMode(){
+  if(connMode==='direct'){setBadge('direct');return;}
+  setBadge(connMode==='php'?'php':'pending');
+  if(phpAvailable===null)await probePhp();
+  if(phpAvailable)setBadge('php');
+  else setBadge('direct',connMode==='php'?'fallback dari PHP':'');
+}
 function progress(done,total,text){$('#queue').classList.add('show');$('#queue-label').textContent=text;$('#queue-count').textContent=`${done} / ${total}`;$('#progress-fill').style.width=total?`${Math.round(done/total*100)}%`:'0%';}
 async function test(m,signal){m.status='testing';m.error='';m.result=null;render();try{m.result=await call('test_model',m.id,signal);m.httpCode=m.result.http_code||200;m.latency=m.result.latency_ms;if(m.result.success){m.status='online';}else{m.status='error';m.error=m.result.error||`HTTP ${m.httpCode}`;}}catch(e){m.status='error';m.error=e.name==='AbortError'?'Pengujian dihentikan.':e.message;const match=m.error.match(/HTTP\s+(\d{3})/i);m.httpCode=e.responseData?.http_code||(match?Number(match[1]):0);m.latency=e.responseData?.latency_ms??null;m.result=e.responseData||{error:m.error,http_code:m.httpCode,latency_ms:null,reply_text:'',raw_response:null};}render();}
 async function scan(){if(scanning||queue)return;save();clearNotice();scanning=true;controls();const b=$('#scan-button'),old=b.textContent;b.textContent='Scanning…';try{const d=await call('scan');if(!d.success)throw Error(d.error||'Scan gagal.');models=(d.models||[]).map(x=>({id:String(x.id),name:String(x.name||x.id),status:'idle',httpCode:0,latency:null,result:null,error:''}));if(!models.length)notice('Endpoint tidak mengembalikan daftar model.');render();}catch(e){notice(e.message);}finally{scanning=false;b.textContent=old;render();}}
@@ -46,7 +185,7 @@ function openChat(m){activeChatModel=m;chatHistory=[];chatBusy=false;$('#chat-ti
 function closeChat(){if(chatBusy)return;$('#chat-drawer').classList.remove('open');$('#chat-drawer').setAttribute('aria-hidden','true');$('#chat-scrim').classList.remove('open');document.body.style.overflow='';}
 $('#close-chat').addEventListener('click',closeChat);$('#chat-scrim').addEventListener('click',closeChat);$('#clear-chat').addEventListener('click',()=>{if(chatBusy)return;chatHistory=[];drawChat();$('#chat-input').focus();});$('#chat-form').addEventListener('submit',async e=>{e.preventDefault();const input=$('#chat-input'),text=input.value.trim();if(!text||!activeChatModel||chatBusy)return;chatHistory.push({role:'user',content:text});input.value='';drawChat();chatBusy=true;$('#chat-typing').hidden=false;$('#send-chat').disabled=true;input.disabled=true;try{const d=await call('chat',activeChatModel.id,null,{messages:chatHistory.map(({role,content})=>({role,content}))});chatHistory.push({role:'assistant',content:d.reply_text||'(Model mengembalikan respons kosong)'});}catch(err){chatHistory.push({role:'assistant',content:err.message,error:true});}finally{chatBusy=false;$('#chat-typing').hidden=true;$('#send-chat').disabled=false;input.disabled=false;drawChat();input.focus();}});
 list.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const m=models.find(x=>x.id===b.dataset.id);if(!m)return;switch(b.dataset.action){case'view':view(m);break;case'code':openCode(m);break;case'chat':openChat(m);break;case'test':if(!queue&&!scanning){save();clearNotice();test(m);}break;}});
-async function call(action,id,signal,extra={}){const c=config();if(!c.base_url)throw Error('Masukkan Base URL terlebih dahulu.');const r=await fetch('api.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action,...c,model:id||'',...extra}),signal});let d;try{d=await r.json();}catch(_){throw Error(`Respons proxy tidak valid (HTTP ${r.status}).`);}if(!r.ok||d.success===false){const error=Error(d.error||`HTTP ${r.status}`);error.responseData=d;throw error;}return d;}
-$('#close-modal').addEventListener('click',()=>modal.close?modal.close():modal.removeAttribute('open'));modal.addEventListener('click',e=>{if(e.target===modal&&modal.close)modal.close();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chatBusy)closeChat();});restore();render();
+
+$('#close-modal').addEventListener('click',()=>modal.close?modal.close():modal.removeAttribute('open'));modal.addEventListener('click',e=>{if(e.target===modal&&modal.close)modal.close();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chatBusy)closeChat();});restore();render();connModeSel.addEventListener('change',async()=>{connMode=connModeSel.value;phpAvailable=null;save();clearNotice();await initMode();});initMode();
 })();
 </script></body></html>

@@ -1,5 +1,10 @@
 # AI Endpoint & Model Scanner
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-4f46e5?logo=github)](https://enraidev.github.io/ai-endpoint-scanner/)
+[![Runs on](https://img.shields.io/badge/runs%20on-GitHub%20Pages%20%7C%20XAMPP%20%7C%20PHP-blue)](https://enraidev.github.io/ai-endpoint-scanner/)
+
+**Live demo:** <https://enraidev.github.io/ai-endpoint-scanner/> — runs fully in the browser via direct fetch (no PHP required). Self-host with XAMPP/PHP to use the `api.php` proxy instead.
+
 A lightweight native-PHP dashboard for discovering models on OpenAI-compatible APIs, checking availability and latency, and trying models interactively. No framework, Composer install, Node build, or third-party frontend library is required.
 
 ![Dashboard screenshot placeholder](docs/images/dashboard-placeholder.svg)
@@ -17,12 +22,13 @@ A lightweight native-PHP dashboard for discovering models on OpenAI-compatible A
 - Per-model snippets: cURL, Python (`openai`), JavaScript (`fetch`), and PHP (cURL).
 - Per-model Quick Chat drawer with temporary conversation history, typing indicator, and Clear Chat.
 - Responsive native HTML/CSS/JavaScript frontend and PHP cURL backend, without frontend dependencies.
+- **Dual-mode requests:** automatic PHP proxy (`api.php`) with direct browser fetch fallback, plus an `Auto` / `PHP Proxy` / `Direct Browser` selector and a live mode badge.
 
 ## Requirements
 
-- PHP 7.4+ (PHP 8+ recommended) with the cURL extension enabled.
-- Apache/XAMPP or PHP's built-in development server.
 - An OpenAI-compatible API endpoint. Some providers require an API key.
+- **Optional (proxy mode):** PHP 7.4+ (PHP 8+ recommended) with the cURL extension enabled, served by Apache/XAMPP or PHP's built-in development server.
+- No PHP is needed for the static build: the page also calls the provider directly from the browser (see [Dual mode](#dual-mode-github-pages-vs-xamppphp)).
 
 ## Run with XAMPP
 
@@ -43,6 +49,19 @@ php -S 127.0.0.1:8000
 ```
 
 Open <http://127.0.0.1:8000/>. This server is for local development and demos, not production deployment.
+
+## Dual mode: GitHub Pages vs XAMPP/PHP
+
+The same `index.html` works in two modes and picks one automatically:
+
+| Mode | When it is used | How requests are made |
+| --- | --- | --- |
+| **PHP proxy** | The page is served by Apache/XAMPP or PHP's built-in server and `api.php` answers with JSON | `POST api.php` → server-side cURL to `<base_url>/models` and `<base_url>/chat/completions`. No CORS restrictions. |
+| **Direct browser fetch** | The page is served from a static host (any `*.github.io` domain or `file://`), or `api.php` returns raw `<?php` source, a non-JSON body, HTTP 404, or HTTP 405 | The browser calls `<base_url>/models` (`GET`) and `<base_url>/chat/completions` (`POST`) itself, sends `Content-Type: application/json` plus `Authorization: Bearer <api key>` when a key is filled in, and measures latency with `performance.now()`. |
+
+Use the **Mode koneksi** selector to override the automatic choice: `Auto` (default), `PHP Proxy`, or `Direct Browser Fetch`. The badge beside it shows the mode in use, including `fallback dari PHP` when a proxy call failed and the request was retried directly.
+
+Direct mode limitation: the provider must allow cross-origin requests (CORS) from this origin. When it does not, the browser blocks the response and the app reports *"Request diblokir CORS oleh provider; jalankan via XAMPP/PHP lokal untuk bypass CORS."* Run the PHP proxy (XAMPP or your own server) to bypass CORS. In direct mode the API key travels from the browser straight to the provider.
 
 ## Proxy API
 
@@ -65,6 +84,8 @@ API keys are stored in browser `localStorage` and sent to your PHP server for pr
 
 ## Bahasa Indonesia
 
+**Live demo:** <https://enraidev.github.io/ai-endpoint-scanner/> — berjalan penuh di browser lewat direct fetch (tanpa PHP). Self-host dengan XAMPP/PHP untuk memakai proxy `api.php`.
+
 Dashboard native PHP yang ringan untuk menemukan model pada endpoint OpenAI-compatible, memeriksa ketersediaan dan latency, serta mencoba model secara langsung. Tidak membutuhkan framework, Composer, proses build Node, atau library frontend eksternal.
 
 ![Placeholder screenshot dashboard](docs/images/dashboard-placeholder.svg)
@@ -81,6 +102,7 @@ Dashboard native PHP yang ringan untuk menemukan model pada endpoint OpenAI-comp
 - Snippet per model siap salin: cURL, Python (`openai`), JavaScript (`fetch`), dan PHP (cURL).
 - Quick Chat drawer dengan riwayat percakapan sementara, indikator mengetik, dan tombol Clear Chat.
 - Frontend native yang responsif, backend PHP cURL, tanpa dependensi frontend.
+- **Mode ganda:** proxy PHP (`api.php`) dengan fallback direct fetch dari browser, plus selector `Auto` / `PHP Proxy` / `Direct Browser` dan badge mode aktif.
 
 ### Instalasi di XAMPP
 
@@ -101,6 +123,19 @@ php -S 127.0.0.1:8000
 ```
 
 Buka <http://127.0.0.1:8000/>. Server bawaan PHP ditujukan hanya untuk development/demo lokal.
+
+### Mode ganda: GitHub Pages vs XAMPP/PHP
+
+Halaman yang sama berjalan dalam dua mode dan memilih otomatis:
+
+| Mode | Kapan dipakai | Cara request |
+| --- | --- | --- |
+| **PHP proxy** | Halaman dilayani Apache/XAMPP atau PHP built-in server dan `api.php` membalas JSON | `POST api.php` → cURL di sisi server ke `<base_url>/models` dan `<base_url>/chat/completions`. Bebas CORS. |
+| **Direct browser fetch** | Halaman dilayani host statis (`*.github.io`, `file://`), atau `api.php` mengembalikan kode `<?php` mentah, respons non-JSON, HTTP 404, atau 405 | Browser memanggil `<base_url>/models` (GET) dan `<base_url>/chat/completions` (POST), mengirim `Content-Type: application/json` dan `Authorization: Bearer <api key>` bila key diisi, lalu mengukur latency dengan `performance.now()`. |
+
+Selector **Mode koneksi** menimpa pilihan otomatis: `Auto` (default), `PHP Proxy`, atau `Direct Browser Fetch`. Badge di sebelahnya menampilkan mode yang sedang aktif, termasuk `fallback dari PHP` saat request proxy gagal dan diulang langsung dari browser.
+
+Batas mode direct: provider harus mengizinkan CORS dari origin ini. Jika tidak, browser memblokir respons dan aplikasi menampilkan pesan *"Request diblokir CORS oleh provider; jalankan via XAMPP/PHP lokal untuk bypass CORS."* Jalankan proxy PHP (XAMPP atau server sendiri) untuk melewati CORS. Pada mode direct, API key dikirim langsung dari browser ke provider.
 
 ### Keamanan
 
